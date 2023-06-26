@@ -1,18 +1,5 @@
-resource "aws_network_interface" "web" {
-  subnet_id       = "subnet-03ddf0d4fd589ae9a"
-  security_groups = ["sg-0dd3a367880737f7a"]
-}
-
-resource "aws_instance" "web" {
-  ami           = data.aws_ami.ubuntu.id
-  instance_type = "t2.micro"
-
-  network_interface {
-    network_interface_id = aws_network_interface.web.id
-    device_index         = 0
-  }
-
-  tags = {
-    Name = "altin.hykolli"
-  }
+module "ec2" {
+  source  = "app.terraform.io/altin-devops/ec2/aws"
+  version = "1.0.0"
+  # insert required variables here
 }
